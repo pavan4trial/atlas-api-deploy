@@ -37,5 +37,18 @@ services:
       timeout: 5s
       retries: 5
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      # The credentials you will use to log into the pgAdmin web interface
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@simpawebtec.store}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-securepassword123}
+    expose:
+      - "80"
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   pg_data:
