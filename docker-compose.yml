@@ -4,8 +4,8 @@ services:
     restart: always
     environment:
       SPRING_DATASOURCE_URL: ${DATABASE_URL}
-      SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME:-atlas-db}
-      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD:-atlasdbuser}
+      SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME:-atlasdbuser}
+      SPRING_DATASOURCE_PASSWORD: ${DATABASE_PASSWORD}
       
       # Spring Boot maps these automatically if prefixed
       JWT_SECRET: ${JWT_SECRET}
