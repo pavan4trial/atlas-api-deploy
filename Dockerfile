@@ -9,13 +9,11 @@ ARG REPO_URL=gitea.simpawebtec.in/pavan.s/atlas-api
 ARG GIT_DEPLOY_BRANCH=feature-boq-implementation
 
 # Clone the repo
-RUN git clone --branch ${GIT_DEPLOY_BRANCH} --single-branch https://oauth2:${GIT_TOKEN}@${REPO_URL} app
+RUN git clone --branch ${GIT_DEPLOY_BRANCH} --single-branch https://oauth2:${GIT_TOKEN}@${REPO_URL} source
 
-WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+WORKDIR /app/source
+
 RUN ./mvnw dependency:go-offline
-COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Runtime
