@@ -14,12 +14,17 @@ RUN git clone --branch ${GIT_DEPLOY_BRANCH} --single-branch https://oauth2:${GIT
 
 WORKDIR /app/source
 
-RUN ./mvnw dependency:go-offline
-RUN ./mvnw clean package -DskipTests
+# Verify exactly what was cloned (visible in Coolify build logs)
+RUN ls -la
+
+# Build using the global 'mvn' command instead of './mvnw'
+RUN mvn dependency:go-offline
+RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+# Copy the built jar file
+COPY --from=builder /app/source/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
