@@ -9,6 +9,8 @@ ARG GIT_TOKEN=2aa77817bb9b0c20d3b10d1866532648d1071594
 ARG REPO_URL=gitea.simpawebtec.in/pavan.s/atlas-api
 ARG GIT_DEPLOY_BRANCH=feature-boq-implementation
 
+WORKDIR /app
+
 # Clone the repo
 RUN git clone --branch ${GIT_DEPLOY_BRANCH} --single-branch https://oauth2:${GIT_TOKEN}@${REPO_URL} source
 
