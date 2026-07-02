@@ -37,24 +37,22 @@ services:
       timeout: 5s
       retries: 5
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
+  adminer:
+    image: adminer:latest
     restart: always
     environment:
-      # The credentials you will use to log into the pgAdmin web interface
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@simpawebtec.store}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-securepassword123}
+      ADMINER_DEFAULT_SERVER: db
     expose:
-      - "80"
+      - "8080"
     depends_on:
       db:
         condition: service_healthy
     healthcheck:
-      # wget is used instead of curl because the pgadmin image is Alpine-based
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost/misc/ping"]
+      # Adminer serves the login page at the root URL (/) on port 8080
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries:
 
 volumes:
   pg_data:
