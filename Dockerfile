@@ -25,6 +25,7 @@ RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Runtime
 FROM eclipse-temurin:21-jre-jammy
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 # Copy the built jar file
 COPY --from=builder /app/source/target/*.jar app.jar
