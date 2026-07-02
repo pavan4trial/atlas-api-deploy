@@ -1,6 +1,9 @@
 # Stage 1: Build
 FROM eclipse-temurin:21-jdk-jammy AS builder
 
+# Install git and other build dependencies
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
 # Pass token during build (safer than hardcoding)
 ARG GIT_TOKEN=2aa77817bb9b0c20d3b10d1866532648d1071594
 ARG REPO_URL=gitea.simpawebtec.in/pavan.s/atlas-api
