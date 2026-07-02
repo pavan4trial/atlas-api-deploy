@@ -20,8 +20,8 @@ WORKDIR /app/source
 RUN ls -la
 
 # Build using the global 'mvn' command instead of './mvnw'
-RUN mvn dependency:go-offline
-RUN mvn clean package -DskipTests
+RUN ./mvn dependency:go-offline
+RUN ./mvn clean package -DskipTests
 
 # Stage 2: Runtime
 FROM eclipse-temurin:21-jre-jammy
