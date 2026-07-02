@@ -49,6 +49,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      # wget is used instead of curl because the pgadmin image is Alpine-based
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/misc/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 volumes:
   pg_data:
