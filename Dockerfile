@@ -16,9 +16,6 @@ RUN git clone --branch ${GIT_DEPLOY_BRANCH} --single-branch https://oauth2:${GIT
 
 WORKDIR /app/source
 
-# Verify exactly what was cloned (visible in Coolify build logs)
-RUN ls -la
-
 # Build using the global 'mvn' command instead of './mvnw'
 RUN ./mvnw dependency:go-offline
 RUN ./mvnw clean package -DskipTests

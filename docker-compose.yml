@@ -2,6 +2,8 @@ services:
   app:
     build: .
     restart: always
+    expose:
+      - "8080"
     environment:
       SPRING_DATASOURCE_URL: ${DATABASE_URL}
       SPRING_DATASOURCE_USERNAME: ${DATABASE_USERNAME:-atlasdbuser}
